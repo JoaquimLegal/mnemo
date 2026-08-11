@@ -324,7 +324,7 @@ async function setupOpenCode(): Promise<void> {
   }
   config.mcp = {
     ...(config.mcp ?? {}),
-    mnemo: { type: "stdio", command: "mm", args: ["mcp"] },
+    mnemo: { type: "local", command: ["mm", "mcp"], enabled: true },
   };
   await fs.writeFile(configPath, JSON.stringify(config, null, 2) + "\n");
   console.log(`configured MCP → ${configPath}`);
