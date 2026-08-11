@@ -1,9 +1,17 @@
 {
-  "name": "mnemo",
+  "name": "mnemo-mem",
   "version": "0.1.0",
-  "description": "Git-native memory for AI agents",
+  "description": "Give your AI agents a git repo as a brain. Local-first persistent memory for OpenCode, Claude Code, Cursor & Codex — MCP server + auto-capture plugin.",
   "type": "module",
   "license": "MIT",
+  "homepage": "https://github.com/JoaquimLegal/mnemo#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JoaquimLegal/mnemo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JoaquimLegal/mnemo/issues"
+  },
   "bin": {
     "mm": "./dist/cli.js"
   },

@@ -59,7 +59,7 @@ rank — zero dependencies, ~90% recall@1 on synthetic corpora.
 ## Install & use
 
 ```sh
-npm i -g mnemo
+npm i -g mnemo-mem
 
 # not published yet? run from source instead:
 git clone https://github.com/JoaquimLegal/mnemo && cd mnemo
