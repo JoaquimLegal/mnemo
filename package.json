@@ -1,0 +1,54 @@
+{
+  "name": "mnemo",
+  "version": "0.1.0",
+  "description": "Git-native memory for AI agents",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "mm": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "docs",
+    "prompts",
+    "scripts"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "benchmark": "tsx scripts/benchmark.ts",
+    "demo": "bash scripts/demo.sh",
+    "prepublishOnly": "npm test && npm run build"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "memory",
+    "mcp",
+    "opencode",
+    "llm",
+    "claude-code",
+    "cursor",
+    "codex",
+    "ai-memory",
+    "typescript",
+    "bm25",
+    "git"
+  ],
+  "devDependencies": {
+    "@opencode-ai/plugin": "^1.18.16",
+    "@opencode-ai/sdk": "^1.18.16",
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0"
+  }
+}
