@@ -1,14 +1,17 @@
 # mnemo
 
+[![npm version](https://img.shields.io/npm/v/mnemo-mem?color=bd93f9&label=npm)](https://www.npmjs.com/package/mnemo-mem)
+[![npm downloads](https://img.shields.io/npm/dw/mnemo-mem?color=6272a4)](https://www.npmjs.com/package/mnemo-mem)
+[![license MIT](https://img.shields.io/github/license/JoaquimLegal/mnemo?color=50fa7b)](LICENSE)
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-ff79c6)](CONTRIBUTING.md)
+
 > **Give your AI agents a git repo as a brain.**
 
 `mnemo` is persistent, local-first memory for AI agents (OpenCode, Claude Code,
 Cursor, Codex…). Agents remember by writing **Markdown files into a git repo** —
 so you get auditability, branching, snapshots, and rollback for free.
 
-<!--
-![demo](https://user-images.githubusercontent.com/placeholder/mnemo-demo.gif)
--->
+![demo](demo.gif)
 
 ```
 $ mm new "We chose Postgres" --body "over Mongo, because of transactions" --tags decision,db --importance 0.9
@@ -113,6 +116,7 @@ npm test              # vitest — 32 tests
 npm run build         # tsc
 npm run benchmark     # recall@k on 100/1000-memory corpora
 bash scripts/demo.sh  # watch it work
+vhs -o demo.gif scripts/demo.tape   # regenerate the README GIF (needs vhs + ttyd)
 ```
 
 ## License
