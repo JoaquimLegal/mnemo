@@ -61,6 +61,10 @@ rank — zero dependencies, ~90% recall@1 on synthetic corpora.
 ```sh
 npm i -g mnemo
 
+# not published yet? run from source instead:
+git clone https://github.com/JoaquimLegal/mnemo && cd mnemo
+npm install && npm run build && npm link
+
 # in your project:
 mm init
 mm setup-opencode        # installs the OpenCode plugin + MCP config, then restart OpenCode
