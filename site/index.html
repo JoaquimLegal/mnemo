@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>mnemo — git-native memory for AI agents</title>
+  <meta
+    name="description"
+    content="mnemo gives your AI agents a persistent, versioned, auditable memory backed by a git repo. Remember decisions across sessions — no database, no cloud, zero dependencies."
+  />
+  <meta name="theme-color" content="#191a21" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="mnemo — git-native memory for AI agents" />
+  <meta
+    property="og:description"
+    content="A git repo as a brain. Your agents remember decisions across sessions — auditable, forkable, diffable."
+  />
+  <meta property="og:image" content="https://joaquimlegal.github.io/mnemo/demo.gif" />
+  <link
+    rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23282a36'/%3E%3Cpath d='M9 22V10h3.4l7 7.4V10H23v12h-3.4l-7-7.4V22z' fill='%23bd93f9'/%3E%3C/svg%3E"
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="#top" aria-label="mnemo home">
+      <svg class="nav__logo" viewBox="0 0 32 32" aria-hidden="true">
+        <rect width="32" height="32" rx="7" fill="var(--bg-elev)" />
+        <path d="M9 22V10h3.4l7 7.4V10H23v12h-3.4l-7-7.4V22z" fill="var(--purple)" />
+      </svg>
+      <span>mnemo</span>
+    </a>
+    <nav class="nav__links" aria-label="primary">
+      <a href="#why">Why</a>
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#demo">Demo</a>
+      <a href="#install">Install</a>
+      <a href="#docs">Docs</a>
+    </nav>
+    <a class="btn btn--ghost nav__cta" href="https://github.com/JoaquimLegal/mnemo" target="_blank" rel="noopener">
+      <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="currentColor">
+        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+      </svg>
+      GitHub
+    </a>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="container hero__inner">
+        <p class="eyebrow reveal">git-native memory for AI agents</p>
+        <h1 class="hero__title reveal">
+          Give your AI agents<br />
+          a <span class="grad">git repo as a brain</span>
+        </h1>
+        <p class="hero__sub reveal">
+          Agents forget everything between sessions. mnemo gives them a persistent, versioned,
+          auditable memory that lives <strong>inside your project</strong> — stored as plain files,
+          committed with git, and recalled on demand.
+        </p>
+        <div class="hero__cta reveal">
+          <a class="btn btn--primary" href="#install">Get started</a>
+          <a class="btn btn--ghost" href="https://github.com/JoaquimLegal/mnemo" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        <div class="hero__terminal reveal">
+          <div class="terminal" role="img" aria-label="Terminal: installing mnemo and storing a memory">
+            <div class="terminal__bar">
+              <span class="terminal__dot" style="--i:1"></span>
+              <span class="terminal__dot" style="--i:2"></span>
+              <span class="terminal__dot" style="--i:3"></span>
+              <span class="terminal__title">zsh — 80×24</span>
+            </div>
+            <div class="terminal__body">
+              <pre class="type"><span class="p">$</span> <span class="rest">npm i -g mnemo-mem</span></pre>
+              <pre><span class="m">added 1 package in 1.2s</span></pre>
+              <pre class="type"><span class="p">$</span> <span class="rest">mm init</span></pre>
+              <pre><span class="g">created .mnemo/</span></pre>
+              <pre class="type"><span class="p">$</span> <span class="rest">mm new "decided: postgres over sqlite" --importance 0.9</span></pre>
+              <pre><span class="g">wrote main/1a2b3c4d</span></pre>
+              <pre class="type"><span class="p">$</span> <span class="rest">mm log</span></pre>
+              <pre><span class="c">3bfb2c4  <span class="dim">2026-08-11 20:20</span>  mem: add 1a2b3c4d - decided: postgres over sqlite</span>
+<span class="c">2e91a77  <span class="dim">2026-08-11 19:44</span>  mem: add 7f11d9ab - session ses_00 · picked the database</span></pre>
+              <pre><span class="cursor" aria-hidden="true"></span></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST BAR -->
+    <section class="trust" aria-label="project status">
+      <div class="container trust__inner reveal">
+        <a class="badge" href="https://www.npmjs.com/package/mnemo-mem" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" width="12" height="12" fill="var(--red)" aria-hidden="true"><path d="M0 2v10h5v1h3v-1h8V2H0zm8 9H5V5H3v6H1V4h7v7zm2 0V4h5v5h-2V5h-1v4H5v2h5z"/></svg>
+          npm <strong>mnemo-mem</strong>
+        </a>
+        <a class="badge" href="https://github.com/JoaquimLegal/mnemo/actions" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" width="12" height="12" fill="var(--green)" aria-hidden="true"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 11.5H9v-3H7v3H4.5v-6h2v2.5h3V5.5h2v6z"/></svg>
+          CI passing
+        </a>
+        <span class="badge">
+          <svg viewBox="0 0 16 16" width="12" height="12" fill="var(--yellow)" aria-hidden="true"><path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 14.5A6.5 6.5 0 1 1 8 1.5a6.5 6.5 0 0 1 0 13zM8 4a1 1 0 0 0-1 1v3a1 1 0 0 0 .5.87l3 1.73a1 1 0 1 0 1-1.73L9 7.2V5a1 1 0 0 0-1-1z"/></svg>
+          MIT license
+        </span>
+        <span class="badge">
+          <svg viewBox="0 0 16 16" width="12" height="12" fill="var(--cyan)" aria-hidden="true"><path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 14.5A6.5 6.5 0 1 1 8 1.5a6.5 6.5 0 0 1 0 13zM8 4a1 1 0 0 0-1 1v3a1 1 0 0 0 .5.87l3 1.73a1 1 0 1 0 1-1.73L9 7.2V5a1 1 0 0 0-1-1z"/></svg>
+          zero dependencies
+        </span>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section class="section" id="why">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow">the problem</p>
+          <h2>Every agent starts from zero.<br />Every single session.</h2>
+          <p class="section__sub">
+            You ask your coding agent to pick a database. It does. Then you close the session —
+            and next time it picks something different, because it never remembered.
+          </p>
+        </div>
+        <div class="grid grid--3">
+          <article class="card reveal">
+            <svg class="card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+              <path d="M20 9v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9m16 0-2-5H6L4 9m16 0H4m6 3h4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3>Context evaporates</h3>
+            <p>New session, blank brain. Every decision you paid tokens to make is gone the moment you close the terminal.</p>
+          </article>
+          <article class="card reveal">
+            <svg class="card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+              <path d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3>Re-explaining forever</h3>
+            <p>“Remember, we already decided on postgres.” You type that sentence dozens of times — wasting tokens and patience.</p>
+          </article>
+          <article class="card reveal">
+            <svg class="card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+              <path d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM12 14a7 7 0 0 0-7 7h14a7 7 0 0 0-7-7z" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3>No audit trail</h3>
+            <p>When your agent “knew” something and when — good luck. There’s no git history for the things that mattered.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow">the fix</p>
+          <h2>Memory that behaves like code</h2>
+          <p class="section__sub">
+            mnemo treats an agent’s memory the way git treats source: versioned, diffable, branchable,
+            and inspectable at any point in time.
+          </p>
+        </div>
+        <div class="grid grid--3">
+          <article class="card reveal">
+            <svg class="card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+              <path d="M4 12a8 8 0 0 1 16 0M12 12l3-3m-3 3-3 3m3-3 3 3m-3-3-3-3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3>Auto-capture</h3>
+            <p>At the end of every OpenCode session the plugin summarizes what happened and stores it — automatically.</p>
+          </article>
+          <article class="card reveal">
+            <svg class="card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+              <path d="M21 21l-4.3-4.3M10 17a7 7 0 1 1 0-14 7 7 0 0 1 0 14z" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3>Relevance search</h3>
+            <p>Ranked BM25 retrieval returns only the top memories that matter — so the agent gets signal, not a dump.</p>
+          </article>
+          <article class="card reveal">
+            <svg class="card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+              <path d="M12 15v5m0 0-2-2m2 2 2-2M12 9V4m0 0L10 6m2-2 2 2M4 12h5m0 0-2-2m2 2-2 2m13-2h-5m0 0 2-2m-2 2 2 2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3>Every change committed</h3>
+            <p>Each memory write is a git commit. Revert a bad one, diff two versions, see exactly when an agent knew what.</p>
+          </article>
+          <article class="card reveal">
+            <svg class="card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+              <path d="M7 12h6m-6 4h4M7 8h9m2 6a6 6 0 1 1-6-6h2l3-3v3a6 6 0 0 1 1 6z" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3>Branchable timelines</h3>
+            <p>Fork the memory like a branch — spin up an experimental timeline and switch back when the experiment fails.</p>
+          </article>
+          <article class="card reveal">
+            <svg class="card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+              <path d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7l8-4zm0 5v6m-3-3h6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3>Local &amp; private</h3>
+            <p>No database, no cloud, no telemetry. A plain folder in your project. Copy it, move it, delete it — it’s yours.</p>
+          </article>
+          <article class="card reveal">
+            <svg class="card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+              <path d="M3 17l6-6 4 4 8-8m0 0h-5m5 0v5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3>Diffable &amp; reviewable</h3>
+            <p>Open a PR for your agent’s memory. Because decisions are data, they can be reviewed like code.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section section--alt" id="how">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow">how it works</p>
+          <h2>Three steps. No magic.</h2>
+        </div>
+        <ol class="steps">
+          <li class="step reveal">
+            <div class="step__num">01</div>
+            <div class="step__body">
+              <h3>Install &amp; initialize</h3>
+              <p>One command creates a memory store in <code class="inline">.mnemo/</code> — a tiny git repo inside your project.</p>
+            </div>
+          </li>
+          <li class="step reveal">
+            <div class="step__num">02</div>
+            <div class="step__body">
+              <h3>The agent writes memory</h3>
+              <p>Via the OpenCode plugin, an MCP tool, or <code class="inline">mm new</code>. Every write is auto-committed to git.</p>
+            </div>
+          </li>
+          <li class="step reveal">
+            <div class="step__num">03</div>
+            <div class="step__body">
+              <h3>Next session recalls</h3>
+              <p>At session start the agent gets the highlights; when it needs details, <code class="inline">recall</code> fetches the top ranked memories.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- DEMO -->
+    <section class="section" id="demo">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow">live demo</p>
+          <h2>Watch it remember</h2>
+          <p class="section__sub">
+            Two sessions, one brain. The agent decides in the first — and recalls the decision in the second.
+          </p>
+        </div>
+        <figure class="demo reveal">
+          <img src="demo.gif" alt="Animated demo: mnemo captures a decision in one OpenCode session and recalls it in the next" loading="lazy" />
+          <figcaption>
+            Recorded with <a href="https://github.com/charmbracelet/vhs" target="_blank" rel="noopener">vhs</a> —
+            reproduce it anytime with <code class="inline">scripts/demo.tape</code>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- INSTALL -->
+    <section class="section section--alt" id="install">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow">get started</p>
+          <h2>Up and running in 30 seconds</h2>
+        </div>
+        <div class="install reveal">
+          <div class="code">
+            <div class="code__bar">
+              <span>npm install</span>
+              <button class="copy" data-copy="npm i -g mnemo-mem" aria-label="Copy npm command">copy</button>
+            </div>
+            <pre><code><span class="p">$</span> <span class="g">npm</span> i -g mnemo-mem
+<span class="p">$</span> <span class="g">mm</span> init
+<span class="g">created .mnemo/</span>
+
+<span class="p">$</span> <span class="g">mm</span> setup-opencode
+<span class="g">installed plugin → ~/.config/opencode/plugins/mnemo.js</span>
+<span class="g">configured MCP → opencode.json</span>
+<span class="dim">restart OpenCode for the plugin and MCP server to load</span></code></pre>
+          </div>
+          <div class="code">
+            <div class="code__bar">
+              <span>OpenCode MCP config</span>
+              <button class="copy" data-copy='{"mcp":{"mnemo":{"type":"local","command":["mm","mcp"],"enabled":true}}}' aria-label="Copy MCP config">copy</button>
+            </div>
+            <pre><code><span class="c">// opencode.json</span>
+{
+  <span class="k">"mcp"</span>: {
+    <span class="k">"mnemo"</span>: {
+      <span class="k">"type"</span>: <span class="s">"local"</span>,
+      <span class="k">"command"</span>: [<span class="s">"mm"</span>, <span class="s">"mcp"</span>],
+      <span class="k">"enabled"</span>: <span class="b">true</span>
+    }
+  }
+}</code></pre>
+          </div>
+        </div>
+        <div class="quote reveal">
+          <blockquote>
+            Every tool your agent needs to persist and recall —
+            <code class="inline">remember</code>, <code class="inline">recall</code>, <code class="inline">search</code>, <code class="inline">list</code>, <code class="inline">forget</code>, <code class="inline">status</code> —
+            exposed over MCP. Works with any agent that speaks MCP.
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOCS -->
+    <section class="section" id="docs">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="eyebrow">documentation</p>
+          <h2>Curious about the internals?</h2>
+        </div>
+        <div class="grid grid--3">
+          <a class="card card--link reveal" href="https://github.com/JoaquimLegal/mnemo/blob/main/docs/01-architecture.md" target="_blank" rel="noopener">
+            <h3>Architecture</h3>
+            <p>How the store, the git layer and the search engine fit together.</p>
+            <span class="card__arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="card card--link reveal" href="https://github.com/JoaquimLegal/mnemo/blob/main/docs/02-git-substrate.md" target="_blank" rel="noopener">
+            <h3>Git substrate</h3>
+            <p>Why memory-as-commits is the whole point — branching, reverts, snapshots.</p>
+            <span class="card__arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="card card--link reveal" href="https://github.com/JoaquimLegal/mnemo/blob/main/docs/03-search.md" target="_blank" rel="noopener">
+            <h3>Search engine</h3>
+            <p>Tokenization, BM25 ranking and the benchmark behind the retrieval.</p>
+            <span class="card__arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="card card--link reveal" href="https://github.com/JoaquimLegal/mnemo/blob/main/docs/04-mcp.md" target="_blank" rel="noopener">
+            <h3>MCP server</h3>
+            <p>The tool surface exposed to agents and how to wire any client.</p>
+            <span class="card__arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="card card--link reveal" href="https://github.com/JoaquimLegal/mnemo/blob/main/docs/launch.md" target="_blank" rel="noopener">
+            <h3>Launch notes</h3>
+            <p>How this project was taken from idea to npm — a small case study.</p>
+            <span class="card__arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="card card--link reveal" href="https://github.com/JoaquimLegal/mnemo/blob/main/README.md" target="_blank" rel="noopener">
+            <h3>README</h3>
+            <p>The full story, quick start, and every CLI command documented.</p>
+            <span class="card__arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section cta">
+      <div class="container cta__inner reveal">
+        <h2>Stop repeating yourself.<br />Let the agent remember.</h2>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="#install">Get started</a>
+          <a class="btn btn--ghost" href="https://github.com/JoaquimLegal/mnemo" target="_blank" rel="noopener">★ Star on GitHub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <svg viewBox="0 0 32 32" width="20" height="20" aria-hidden="true">
+          <rect width="32" height="32" rx="7" fill="var(--bg-elev)" />
+          <path d="M9 22V10h3.4l7 7.4V10H23v12h-3.4l-7-7.4V22z" fill="var(--purple)" />
+        </svg>
+        <span>mnemo</span>
+      </div>
+      <p class="footer__note">
+        MIT licensed · built with TypeScript · <a href="https://github.com/JoaquimLegal/mnemo" target="_blank" rel="noopener">github.com/JoaquimLegal/mnemo</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

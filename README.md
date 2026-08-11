@@ -7,6 +7,8 @@
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-ff79c6)](CONTRIBUTING.md)
 
 > **Give your AI agents a git repo as a brain.**
+>
+> 🌐 Live site: <https://joaquimlegal.github.io/mnemo/>
 
 `mnemo` is persistent, local-first memory for AI agents (OpenCode, Claude Code,
 Cursor, Codex…). Agents remember by writing **Markdown files into a git repo** —
