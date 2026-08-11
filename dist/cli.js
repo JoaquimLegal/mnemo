@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
 import { MemoryStore, DEFAULT_ROOT } from "./store.js";
 import { MEMORY_TYPES } from "./types.js";
+import { mergeMCPConfig } from "./opencode-config.js";
 function usage() {
     console.log(`mnemo - git-native memory for AI agents
 
@@ -44,6 +45,13 @@ async function main() {
     const cmd = argv[0] ?? "help";
     if (cmd === "help" || cmd === "--help" || cmd === "-h") {
         usage();
+        return;
+    }
+    if (cmd === "--version" || cmd === "-v") {
+        const { createRequire } = await import("node:module");
+        const require = createRequire(import.meta.url);
+        const pkg = require("../package.json");
+        console.log(`${pkg.name ?? "mnemo"} ${pkg.version ?? "0.0.0"}`);
         return;
     }
     const store = new MemoryStore(DEFAULT_ROOT);
@@ -314,10 +322,7 @@ async function setupOpenCode() {
     catch {
         /* new file */
     }
-    config.mcp = {
-        ...(config.mcp ?? {}),
-        mnemo: { type: "local", command: ["mm", "mcp"], enabled: true },
-    };
+    config.mcp = mergeMCPConfig(config.mcp);
     await fs.writeFile(configPath, JSON.stringify(config, null, 2) + "\n");
     console.log(`configured MCP → ${configPath}`);
     await new MemoryStore(DEFAULT_ROOT).init();

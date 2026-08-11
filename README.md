@@ -2,6 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/mnemo-mem?color=bd93f9&label=npm)](https://www.npmjs.com/package/mnemo-mem)
 [![npm downloads](https://img.shields.io/npm/dw/mnemo-mem?color=6272a4)](https://www.npmjs.com/package/mnemo-mem)
+[![CI](https://img.shields.io/github/actions/workflow/status/JoaquimLegal/mnemo/ci.yml?color=50fa7b&label=CI)](https://github.com/JoaquimLegal/mnemo/actions/workflows/ci.yml)
 [![license MIT](https://img.shields.io/github/license/JoaquimLegal/mnemo?color=50fa7b)](LICENSE)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-ff79c6)](CONTRIBUTING.md)
 

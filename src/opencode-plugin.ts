@@ -137,12 +137,45 @@ async function summarize(
     if (!sid) return null;
     busy.add(sid);
 
+    // 1) Try structured output (OpenCode forces tool_choice: "required" here,
+    //    which thinking/reasoning models reject). Fall back to plain JSON.
+    const structured = await promptSummary(client, sid, transcript, true);
+    if (structured?.title) return structured;
+
+    // 2) Retry without `format` so thinking models (DeepSeek V4, Kimi K2, ...)
+    //    can answer: ask for raw JSON and extract it ourselves.
+    const plain = await promptSummary(client, sid, transcript, false);
+    if (plain?.title) return plain;
+
+    return null;
+  } catch {
+    return null;
+  } finally {
+    if (sid) {
+      busy.delete(sid);
+      await client.session.delete({ path: { id: sid } }).catch(() => undefined);
+    }
+  }
+}
+
+async function promptSummary(
+  client: PluginInput["client"],
+  sid: string,
+  transcript: string,
+  structured: boolean,
+): Promise<StructuredSummary | null> {
+  const body: { parts: { type: string; text: string }[]; format?: unknown } = {
+    parts: [{ type: "text", text: `${CAPTURE_PROMPT}\n\n<session>\n${transcript}\n</session>` }],
+  };
+  if (structured) {
+    body.format = { type: "json_schema", schema: SCHEMA };
+  } else {
+    body.parts[0].text += `\n\nRespond with ONLY a single valid JSON object matching the schema above. Do not wrap it in prose or markdown.`;
+  }
+  try {
     const result = await client.session.prompt({
       path: { id: sid },
-      body: {
-        parts: [{ type: "text", text: `${CAPTURE_PROMPT}\n\n<session>\n${transcript}\n</session>` }],
-        format: { type: "json_schema", schema: SCHEMA },
-      } as never,
+      body: body as never,
     });
     const payload = (result as { data?: unknown }).data ?? result;
     const info = (payload as { info?: { structured_output?: StructuredSummary } }).info;
@@ -154,11 +187,6 @@ async function summarize(
     return parsed && typeof parsed.title === "string" ? parsed : null;
   } catch {
     return null;
-  } finally {
-    if (sid) {
-      busy.delete(sid);
-      await client.session.delete({ path: { id: sid } }).catch(() => undefined);
-    }
   }
 }
 
